@@ -20,9 +20,11 @@ RUN \
 cd /opt && \
 git clone https://github.com/mxe/mxe.git && \
 cd /opt/mxe && \
+echo 'override MXE_PLUGIN_DIRS += plugins/gcc7' >> settings.mk && \
 NPROC=$(($(nproc)+4)) && \
-make --jobs=$NPROC JOBS=$NPROC MXE_TARGETS='i686-w64-mingw32.static' qtbase && \
-ln -s /opt/mxe/usr/bin/i686-w64-mingw32.static-qmake-qt5 /usr/bin/qmake && \
+make --jobs=$NPROC JOBS=$NPROC MXE_TARGETS='x86_64-w64-mingw32.static' qtbase && \
+ln -s /opt/mxe/usr/bin/x86_64-w64-mingw32.static-qmake-qt5 /usr/bin/qmake && \
+/opt/mxe/usr/bin/x86_64-w64-mingw32.static-gcc --version && \
 qmake --version && \
 exit 0
 
